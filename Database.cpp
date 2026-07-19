@@ -7,7 +7,7 @@ namespace RCV
         std::unique_lock<std::shared_mutex> lock(raw_mtx);
         Store[key]=value;
     }
-    bool Database::get(const std::string&key, std::string &out_value){
+    bool Database::get(const std::string&key, std::string &out_value) const {
         // lock only the writing part
         std::shared_lock<std::shared_mutex> lock(raw_mtx);
         auto it=Store.find(key);

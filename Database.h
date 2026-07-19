@@ -19,7 +19,7 @@ namespace RCV
 
         void set(const std::string &key, const std::string &val);
 
-        bool get(const std::string &key, std::string& value);
+        bool get(const std::string &key, std::string& value) const;
     }; // Database
 
 } // namespace
