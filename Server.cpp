@@ -40,7 +40,7 @@ int main(){
         }
         printf("Connection Established \n");
         // now lets read some stuff 
-        char buffer[1024]={};
+        char buffer[1024]={0};
         ssize_t bytes=read(con_nfd,buffer,sizeof(buffer)-1);
         if(bytes<0) continue;
         else{
