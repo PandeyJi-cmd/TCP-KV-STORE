@@ -30,18 +30,27 @@ int main(){
     int rv=bind(fd,(const struct sockaddr* )&addr,sizeof(addr));
     if(rv) { die("NOT BOUNDED");}
     int rv_listen = listen(fd,SOMAXCONN);
+    printf("The server is Listening \n");
     while(true){
         struct sockaddr_in client={};
         socklen_t client_size = sizeof(client);
         int con_nfd=accept(fd, (struct sockaddr*)&client,&client_size);
         if(con_nfd < 0 ){
-            die("NO Connection");
+            continue;
         }
-        printf("Connection Established");
+        printf("Connection Established \n");
+        // now lets read some stuff 
+        char buffer[1024]={};
+        ssize_t bytes=read(con_nfd,buffer,sizeof(buffer)-1);
+        if(bytes<0) continue;
+        else{
+            printf("Client said : %s \n ",buffer);
+            const char *response="OK\n";
+            write(con_nfd,response,strlen(response));
+        }
+        close(con_nfd);
+        printf("Connection Closed\n");
     }
-    
-
-
 }
 
 //tokenizer
