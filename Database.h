@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <shared_mutex>
-
+#include <mutex>
 namespace RCV
 {
     class Database
@@ -14,8 +14,8 @@ namespace RCV
 
 
         public:
-        Database();
-        ~Database();
+        Database() = default;
+        ~Database() = default; // for now lets assume both are default logic will update if needed.
 
         void set(const std::string &key, const std::string &val);
 
